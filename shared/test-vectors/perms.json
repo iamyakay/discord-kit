@@ -1,0 +1,430 @@
+{
+  "encode": [
+    {
+      "input": ["SEND_MESSAGES", "VIEW_CHANNEL"],
+      "output": "3072"
+    },
+    {
+      "input": ["ADMINISTRATOR"],
+      "output": "8"
+    },
+    {
+      "input": ["KICK_MEMBERS", "BAN_MEMBERS", "MANAGE_GUILD"],
+      "output": "38"
+    }
+  ],
+  "decode": [
+    {
+      "input": "3072",
+      "output": ["VIEW_CHANNEL", "SEND_MESSAGES"]
+    },
+    {
+      "input": "8",
+      "output": ["ADMINISTRATOR"]
+    },
+    {
+      "input": "2048",
+      "output": ["SEND_MESSAGES"]
+    },
+    {
+      "input": "2199023255551",
+      "output": ["CREATE_INSTANT_INVITE", "KICK_MEMBERS", "BAN_MEMBERS", "ADMINISTRATOR", "MANAGE_CHANNELS", "MANAGE_GUILD", "ADD_REACTIONS", "VIEW_AUDIT_LOG", "PRIORITY_SPEAKER", "STREAM", "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_TTS_MESSAGES", "MANAGE_MESSAGES", "EMBED_LINKS", "ATTACH_FILES", "READ_MESSAGE_HISTORY", "MENTION_EVERYONE", "USE_EXTERNAL_EMOJIS", "VIEW_GUILD_INSIGHTS", "CONNECT", "SPEAK", "MUTE_MEMBERS", "DEAFEN_MEMBERS", "MOVE_MEMBERS", "USE_VAD", "CHANGE_NICKNAME", "MANAGE_NICKNAMES", "MANAGE_ROLES", "MANAGE_WEBHOOKS", "MANAGE_GUILD_EXPRESSIONS", "USE_APPLICATION_COMMANDS", "REQUEST_TO_SPEAK", "MANAGE_EVENTS", "MANAGE_THREADS", "CREATE_PUBLIC_THREADS", "CREATE_PRIVATE_THREADS", "USE_EXTERNAL_STICKERS", "SEND_MESSAGES_IN_THREADS", "USE_EMBEDDED_ACTIVITIES", "MODERATE_MEMBERS"]
+    }
+  ],
+  "has": [
+    {
+      "permissions": "3072",
+      "permission": "SEND_MESSAGES",
+      "output": true
+    },
+    {
+      "permissions": "3072",
+      "permission": "KICK_MEMBERS",
+      "output": false
+    },
+    {
+      "permissions": "8",
+      "permission": "ADMINISTRATOR",
+      "output": true
+    }
+  ],
+  "add": [
+    {
+      "permissions": "1024",
+      "toAdd": ["SEND_MESSAGES"],
+      "output": "3072"
+    },
+    {
+      "permissions": "0",
+      "toAdd": ["KICK_MEMBERS", "BAN_MEMBERS"],
+      "output": "6"
+    }
+  ],
+  "remove": [
+    {
+      "permissions": "3072",
+      "toRemove": ["SEND_MESSAGES"],
+      "output": "1024"
+    },
+    {
+      "permissions": "6",
+      "toRemove": ["KICK_MEMBERS"],
+      "output": "4"
+    }
+  ],
+  "canManageRole": [
+    {
+      "actor": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "target": {
+        "id": "300",
+        "name": "Member",
+        "permissions": "0",
+        "position": 1
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Moderator", "permissions": "0", "position": 5},
+          {"id": "300", "name": "Member", "permissions": "0", "position": 1}
+        ]
+      },
+      "output": true
+    },
+    {
+      "actor": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "target": {
+        "id": "300",
+        "name": "Admin",
+        "permissions": "0",
+        "position": 10
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Moderator", "permissions": "0", "position": 5},
+          {"id": "300", "name": "Admin", "permissions": "0", "position": 10}
+        ]
+      },
+      "output": false
+    },
+    {
+      "actor": {
+        "user": {"id": "100"},
+        "roles": []
+      },
+      "target": {
+        "id": "300",
+        "name": "Member",
+        "permissions": "0",
+        "position": 1
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "100",
+        "roles": [
+          {"id": "300", "name": "Member", "permissions": "0", "position": 1}
+        ]
+      },
+      "output": true
+    }
+  ],
+  "resolve": [
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1"
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "3072", "position": 1}
+        ]
+      },
+      "output": "3072"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "1", "type": 0, "allow": "0", "deny": "2048"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "3072", "position": 1}
+        ]
+      },
+      "output": "1024"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "100", "type": 1, "allow": "2048", "deny": "0"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "0", "position": 1}
+        ]
+      },
+      "output": "0"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "200", "type": 0, "allow": "0", "deny": "2048"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Admin", "permissions": "8", "position": 1}
+        ]
+      },
+      "output": "8"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": []
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "1", "type": 0, "allow": "0", "deny": "2048"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "100",
+        "roles": []
+      },
+      "output": "1829587348619263"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200", "201", "202"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "1", "type": 0, "allow": "0", "deny": "1024"},
+          {"id": "200", "type": 0, "allow": "0", "deny": "2048"},
+          {"id": "201", "type": 0, "allow": "2048", "deny": "0"},
+          {"id": "100", "type": 1, "allow": "1024", "deny": "0"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Role1", "permissions": "0", "position": 1},
+          {"id": "201", "name": "Role2", "permissions": "0", "position": 2},
+          {"id": "202", "name": "Role3", "permissions": "0", "position": 3}
+        ]
+      },
+      "output": "3072"
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "200", "type": 0, "allow": "2048", "deny": "0"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "2048", "position": 1}
+        ]
+      },
+      "output": "0"
+    }
+  ],
+  "explain": [
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": []
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1"
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "100",
+        "roles": []
+      },
+      "permission": "SEND_MESSAGES",
+      "output": {
+        "allowed": true,
+        "reason": "guild owner"
+      }
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1"
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Admin", "permissions": "8", "position": 1}
+        ]
+      },
+      "permission": "SEND_MESSAGES",
+      "output": {
+        "allowed": true,
+        "reason": "administrator permission"
+      }
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "100", "type": 1, "allow": "0", "deny": "2048"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "3072", "position": 1}
+        ]
+      },
+      "permission": "SEND_MESSAGES",
+      "output": {
+        "allowed": false,
+        "reason": "denied by member overwrite"
+      }
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "200", "type": 0, "allow": "0", "deny": "2048"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Admin", "permissions": "8", "position": 1}
+        ]
+      },
+      "permission": "SEND_MESSAGES",
+      "output": {
+        "allowed": true,
+        "reason": "administrator permission"
+      }
+    },
+    {
+      "member": {
+        "user": {"id": "100"},
+        "roles": ["200"]
+      },
+      "channel": {
+        "id": "500",
+        "guild_id": "1",
+        "permission_overwrites": [
+          {"id": "200", "type": 0, "allow": "2048", "deny": "0"}
+        ]
+      },
+      "guild": {
+        "id": "1",
+        "owner_id": "999",
+        "roles": [
+          {"id": "200", "name": "Member", "permissions": "2048", "position": 1}
+        ]
+      },
+      "permission": "SEND_MESSAGES",
+      "output": {
+        "allowed": false,
+        "reason": "missing VIEW_CHANNEL"
+      }
+    }
+  ],
+  "inviteUrl": [
+    {
+      "clientId": "123456789",
+      "options": {},
+      "output": "https://discord.com/api/oauth2/authorize?client_id=123456789&scope=bot+applications.commands"
+    },
+    {
+      "clientId": "123456789",
+      "options": {
+        "permissions": ["SEND_MESSAGES", "VIEW_CHANNEL"],
+        "guildId": "999"
+      },
+      "output": "https://discord.com/api/oauth2/authorize?client_id=123456789&permissions=3072&scope=bot+applications.commands&guild_id=999"
+    },
+    {
+      "clientId": "123456789",
+      "options": {
+        "scopes": ["bot"],
+        "disableGuildSelect": true
+      },
+      "output": "https://discord.com/api/oauth2/authorize?client_id=123456789&scope=bot&disable_guild_select=true"
+    }
+  ]
+}

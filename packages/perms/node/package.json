@@ -1,0 +1,51 @@
+{
+  "name": "@iamyakay/perms",
+  "version": "0.1.0",
+  "description": "discord permission math and why was this denied explanations",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "discord",
+    "permissions",
+    "bot"
+  ],
+  "author": "iamyakay",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamyakay/discord-kit.git",
+    "directory": "packages/perms/node"
+  },
+  "bugs": "https://github.com/iamyakay/discord-kit/issues",
+  "homepage": "https://github.com/iamyakay/discord-kit/tree/main/packages/perms",
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
